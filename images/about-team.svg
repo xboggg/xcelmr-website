@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:0.1"/>
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:0.1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="500" height="400" fill="white"/>
+  <circle cx="250" cy="200" r="180" fill="url(#bgGrad)"/>
+
+  <!-- Ghana Map Outline (simplified) -->
+  <path d="M200 80 L220 70 L260 75 L290 85 L300 110 L310 150 L305 200 L295 250 L280 290 L250 320 L220 310 L200 280 L190 240 L185 200 L190 150 L195 110 Z" fill="none" stroke="#d1d5db" stroke-width="2" stroke-dasharray="5,5"/>
+
+  <!-- Team Circle -->
+  <!-- Person 1 - Top -->
+  <g transform="translate(225, 100)">
+    <circle cx="25" cy="25" r="30" fill="#f3f4f6"/>
+    <circle cx="25" cy="20" r="15" fill="#8B6914"/>
+    <ellipse cx="25" cy="12" rx="12" ry="8" fill="#1a1a1a"/>
+    <circle cx="21" cy="18" r="2" fill="#1a1a1a"/>
+    <circle cx="29" cy="18" r="2" fill="#1a1a1a"/>
+    <path d="M20 24 Q25 28 30 24" stroke="#1a1a1a" fill="none" stroke-width="1"/>
+    <rect x="15" y="38" width="20" height="15" rx="3" fill="#1e40af"/>
+  </g>
+
+  <!-- Person 2 - Right -->
+  <g transform="translate(320, 170)">
+    <circle cx="25" cy="25" r="30" fill="#f3f4f6"/>
+    <circle cx="25" cy="20" r="15" fill="#C4A574"/>
+    <path d="M13 15 Q25 5 37 15 Q37 8 25 5 Q13 8 13 15" fill="#2d1810"/>
+    <circle cx="21" cy="18" r="2" fill="#1a1a1a"/>
+    <circle cx="29" cy="18" r="2" fill="#1a1a1a"/>
+    <path d="M20 24 Q25 28 30 24" stroke="#1a1a1a" fill="none" stroke-width="1"/>
+    <rect x="15" y="38" width="20" height="15" rx="3" fill="#10b981"/>
+  </g>
+
+  <!-- Person 3 - Bottom Right -->
+  <g transform="translate(280, 270)">
+    <circle cx="25" cy="25" r="30" fill="#f3f4f6"/>
+    <circle cx="25" cy="20" r="15" fill="#6B4423"/>
+    <ellipse cx="25" cy="12" rx="12" ry="8" fill="#1a1a1a"/>
+    <circle cx="21" cy="18" r="2" fill="#1a1a1a"/>
+    <circle cx="29" cy="18" r="2" fill="#1a1a1a"/>
+    <path d="M20 24 Q25 28 30 24" stroke="#1a1a1a" fill="none" stroke-width="1"/>
+    <rect x="15" y="38" width="20" height="15" rx="3" fill="#f59e0b"/>
+  </g>
+
+  <!-- Person 4 - Bottom Left -->
+  <g transform="translate(170, 270)">
+    <circle cx="25" cy="25" r="30" fill="#f3f4f6"/>
+    <circle cx="25" cy="20" r="15" fill="#8B6914"/>
+    <ellipse cx="25" cy="12" rx="12" ry="8" fill="#1a1a1a"/>
+    <circle cx="21" cy="18" r="2" fill="#1a1a1a"/>
+    <circle cx="29" cy="18" r="2" fill="#1a1a1a"/>
+    <path d="M20 24 Q25 28 30 24" stroke="#1a1a1a" fill="none" stroke-width="1"/>
+    <rect x="15" y="38" width="20" height="15" rx="3" fill="#6366f1"/>
+  </g>
+
+  <!-- Person 5 - Left -->
+  <g transform="translate(130, 170)">
+    <circle cx="25" cy="25" r="30" fill="#f3f4f6"/>
+    <circle cx="25" cy="20" r="15" fill="#C4A574"/>
+    <path d="M13 15 Q25 5 37 15 Q37 8 25 5 Q13 8 13 15" fill="#1a1a1a"/>
+    <circle cx="21" cy="18" r="2" fill="#1a1a1a"/>
+    <circle cx="29" cy="18" r="2" fill="#1a1a1a"/>
+    <path d="M20 24 Q25 28 30 24" stroke="#1a1a1a" fill="none" stroke-width="1"/>
+    <rect x="15" y="38" width="20" height="15" rx="3" fill="#ef4444"/>
+  </g>
+
+  <!-- Center Logo -->
+  <circle cx="250" cy="200" r="35" fill="#1e40af"/>
+  <text x="250" y="210" text-anchor="middle" fill="white" font-size="24" font-weight="bold" font-family="Arial">X</text>
+
+  <!-- Connecting Lines -->
+  <line x1="250" y1="130" x2="250" y2="165" stroke="#d1d5db" stroke-width="2"/>
+  <line x1="320" y1="195" x2="285" y2="200" stroke="#d1d5db" stroke-width="2"/>
+  <line x1="305" y1="270" x2="275" y2="230" stroke="#d1d5db" stroke-width="2"/>
+  <line x1="195" y1="270" x2="225" y2="230" stroke="#d1d5db" stroke-width="2"/>
+  <line x1="180" y1="195" x2="215" y2="200" stroke="#d1d5db" stroke-width="2"/>
+
+  <!-- Ghana Flag Accent -->
+  <rect x="50" y="370" width="120" height="6" rx="3" fill="#CE1126"/>
+  <rect x="180" y="370" width="120" height="6" rx="3" fill="#FCD116"/>
+  <rect x="310" y="370" width="120" height="6" rx="3" fill="#006B3F"/>
+</svg>

@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 400">
+  <defs>
+    <linearGradient id="recGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e40af"/>
+      <stop offset="100%" style="stop-color:#3b82f6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background Circle -->
+  <circle cx="250" cy="200" r="150" fill="#f3f4f6"/>
+
+  <!-- Magnifying Glass -->
+  <circle cx="200" cy="180" r="80" fill="none" stroke="url(#recGrad)" stroke-width="12"/>
+  <line x1="260" y1="240" x2="320" y2="300" stroke="url(#recGrad)" stroke-width="15" stroke-linecap="round"/>
+  <circle cx="200" cy="180" r="60" fill="white"/>
+
+  <!-- Person inside magnifying glass -->
+  <g transform="translate(170, 130)">
+    <circle cx="30" cy="25" r="20" fill="#8B6914"/>
+    <ellipse cx="30" cy="15" rx="16" ry="10" fill="#1a1a1a"/>
+    <circle cx="25" cy="23" r="2.5" fill="#1a1a1a"/>
+    <circle cx="35" cy="23" r="2.5" fill="#1a1a1a"/>
+    <path d="M25 32 Q30 36 35 32" stroke="#1a1a1a" fill="none" stroke-width="1.5"/>
+    <rect x="15" y="48" width="30" height="25" rx="5" fill="#1e40af"/>
+    <polygon points="30,48 25,58 30,75 35,58" fill="#f59e0b"/>
+  </g>
+
+  <!-- Checkmark badge -->
+  <circle cx="280" cy="140" r="25" fill="#10b981"/>
+  <polyline points="268,140 276,148 292,132" fill="none" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- CV/Resume documents -->
+  <g transform="translate(340, 180)">
+    <rect x="0" y="0" width="80" height="100" rx="5" fill="white" stroke="#d1d5db" stroke-width="2"/>
+    <rect x="10" y="10" width="30" height="30" rx="3" fill="#e5e7eb"/>
+    <rect x="45" y="15" width="25" height="4" fill="#d1d5db"/>
+    <rect x="45" y="25" width="20" height="4" fill="#d1d5db"/>
+    <rect x="10" y="50" width="60" height="4" fill="#d1d5db"/>
+    <rect x="10" y="60" width="60" height="4" fill="#d1d5db"/>
+    <rect x="10" y="70" width="45" height="4" fill="#d1d5db"/>
+    <rect x="10" y="85" width="30" height="8" rx="2" fill="#1e40af"/>
+  </g>
+
+  <!-- Second document behind -->
+  <rect x="350" y="195" width="80" height="100" rx="5" fill="#f9fafb" stroke="#e5e7eb" stroke-width="2" transform="rotate(5 350 195)"/>
+
+  <!-- Star ratings -->
+  <g transform="translate(80, 280)">
+    <polygon points="15,0 18,10 28,10 20,16 23,26 15,20 7,26 10,16 2,10 12,10" fill="#f59e0b"/>
+    <polygon points="45,0 48,10 58,10 50,16 53,26 45,20 37,26 40,16 32,10 42,10" fill="#f59e0b"/>
+    <polygon points="75,0 78,10 88,10 80,16 83,26 75,20 67,26 70,16 62,10 72,10" fill="#f59e0b"/>
+    <polygon points="105,0 108,10 118,10 110,16 113,26 105,20 97,26 100,16 92,10 102,10" fill="#f59e0b"/>
+    <polygon points="135,0 138,10 148,10 140,16 143,26 135,20 127,26 130,16 122,10 132,10" fill="#d1d5db"/>
+  </g>
+
+  <!-- Ghana colors accent -->
+  <rect x="50" y="370" width="120" height="6" rx="3" fill="#CE1126"/>
+  <rect x="180" y="370" width="120" height="6" rx="3" fill="#FCD116"/>
+  <rect x="310" y="370" width="120" height="6" rx="3" fill="#006B3F"/>
+</svg>
