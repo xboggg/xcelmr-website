@@ -724,8 +724,10 @@ button {
 /* Mobile Toggle */
 .nav-toggle {
     display: none;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
     align-items: center;
     justify-content: center;
     z-index: 10;
@@ -1876,15 +1878,19 @@ button {
         background: var(--dark);
         flex-direction: column;
         justify-content: center;
+        align-items: center;
         gap: var(--spacing-xl);
         opacity: 0;
         visibility: hidden;
+        pointer-events: none;
         transition: all var(--transition-base);
+        z-index: 999;
     }
 
     .nav-menu.active {
         opacity: 1;
         visibility: visible;
+        pointer-events: all;
     }
 
     .nav-link {
@@ -1898,6 +1904,8 @@ button {
 
     .nav-toggle {
         display: flex;
+        z-index: 1000;
+        position: relative;
     }
 
     .dropdown-menu {
@@ -2543,4 +2551,75 @@ button {
         width: 60px;
         height: 60px;
     }
+}
+
+/* ==========================================
+   LEGAL PAGES (Privacy Policy, Terms)
+   ========================================== */
+.legal-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.legal-content .legal-updated {
+    color: var(--gray-500);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--spacing-2xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.legal-content h2 {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--dark);
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-md);
+}
+
+.legal-content h3 {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--dark);
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+.legal-content p {
+    color: var(--gray-700);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-md);
+}
+
+.legal-content ul {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-lg);
+}
+
+.legal-content ul li {
+    color: var(--gray-700);
+    line-height: 1.8;
+    margin-bottom: var(--spacing-sm);
+    position: relative;
+    padding-left: var(--spacing-md);
+}
+
+.legal-content ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 6px;
+    height: 6px;
+    background: var(--primary);
+    border-radius: 50%;
+}
+
+.legal-content a {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+.legal-content a:hover {
+    color: var(--primary-dark);
 }
