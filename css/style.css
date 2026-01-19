@@ -2502,13 +2502,9 @@ button {
 .stat-box .stat-number {
     font-size: var(--font-size-5xl);
     font-weight: 800;
-    color: var(--primary);
+    color: var(--primary-dark);
     display: block;
     line-height: 1.1;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .stat-box .stat-label {
