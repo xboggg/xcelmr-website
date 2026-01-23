@@ -2420,11 +2420,11 @@ button {
 }
 
 /* ==========================================
-   STATS SECTION
+   STATS SECTION - Enhanced with Parallax & Animations
    ========================================== */
 .stats-section {
     background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 50%, #1e40af 100%);
-    padding: var(--spacing-4xl) 0;
+    padding: var(--spacing-3xl) 0;
     position: relative;
     overflow: hidden;
 }
@@ -2437,119 +2437,237 @@ button {
     right: 0;
     bottom: 0;
     background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    animation: parallax-drift 20s linear infinite;
+}
+
+@keyframes parallax-drift {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 60px; }
+}
+
+/* Floating orbs for parallax effect */
+.stats-section::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float-orb 8s ease-in-out infinite;
+}
+
+@keyframes float-orb {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-30px, 30px) scale(1.1); }
 }
 
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--spacing-xl);
+    gap: var(--spacing-lg);
     position: relative;
     z-index: 1;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 .stat-box {
     text-align: center;
-    padding: var(--spacing-2xl) var(--spacing-xl);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.9) 100%);
-    border-radius: var(--radius-xl);
-    border: none;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    padding: var(--spacing-lg) var(--spacing-md);
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     position: relative;
     overflow: hidden;
 }
 
+/* Shimmer effect on hover */
 .stat-box::before {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
-    transform: scaleX(0);
-    transition: transform 0.4s ease;
-}
-
-.stat-box:hover {
-    transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.1),
+        transparent
+    );
+    transition: left 0.5s ease;
 }
 
 .stat-box:hover::before {
-    transform: scaleX(1);
+    left: 100%;
+}
+
+/* Glow effect */
+.stat-box::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-light), var(--secondary), var(--primary-light));
+    background-size: 200% 100%;
+    animation: gradient-flow 3s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-box:hover::after {
+    opacity: 1;
+}
+
+@keyframes gradient-flow {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+}
+
+.stat-box:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
 }
 
 .stat-box .stat-icon {
-    width: 70px;
-    height: 70px;
-    margin: 0 auto var(--spacing-lg);
-    background: linear-gradient(135deg, var(--secondary) 0%, #f59e0b 100%);
-    border-radius: var(--radius-full);
+    width: 50px;
+    height: 50px;
+    margin: 0 auto var(--spacing-md);
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--secondary-light) 100%);
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
-    animation: pulse-glow 2s ease-in-out infinite;
+    box-shadow: 0 8px 20px rgba(245, 158, 11, 0.35);
+    transition: all 0.4s ease;
+    position: relative;
 }
 
-@keyframes pulse-glow {
-    0%, 100% {
-        box-shadow: 0 10px 30px rgba(245, 158, 11, 0.4);
-    }
-    50% {
-        box-shadow: 0 10px 40px rgba(245, 158, 11, 0.6);
-    }
+/* Rotating border animation */
+.stat-box .stat-icon::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: calc(var(--radius-md) + 3px);
+    padding: 3px;
+    background: linear-gradient(45deg, var(--secondary), var(--primary-light), var(--secondary));
+    background-size: 300% 300%;
+    animation: rotate-border 4s linear infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-box:hover .stat-icon::before {
+    opacity: 1;
+}
+
+@keyframes rotate-border {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.stat-box:hover .stat-icon {
+    transform: scale(1.1) rotate(5deg);
 }
 
 .stat-box .stat-icon i {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     color: var(--white);
+    transition: transform 0.3s ease;
+}
+
+.stat-box:hover .stat-icon i {
+    transform: scale(1.1);
 }
 
 .stat-box .stat-number {
-    font-size: var(--font-size-5xl);
+    font-size: var(--font-size-3xl);
     font-weight: 800;
-    color: var(--primary-dark);
+    color: var(--white);
     display: block;
-    line-height: 1.1;
+    line-height: 1.2;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.stat-box:hover .stat-number {
+    transform: scale(1.05);
+    text-shadow: 0 4px 20px rgba(245, 158, 11, 0.4);
 }
 
 .stat-box .stat-label {
-    font-size: var(--font-size-base);
-    color: var(--gray-600);
+    font-size: var(--font-size-xs);
+    color: rgba(255, 255, 255, 0.75);
     display: block;
-    margin-top: var(--spacing-sm);
-    font-weight: 600;
+    margin-top: var(--spacing-xs);
+    font-weight: 500;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
 }
+
+.stat-box:hover .stat-label {
+    color: var(--secondary);
+}
+
+/* Staggered animation on scroll */
+.stat-box:nth-child(1) { animation-delay: 0s; }
+.stat-box:nth-child(2) { animation-delay: 0.1s; }
+.stat-box:nth-child(3) { animation-delay: 0.2s; }
+.stat-box:nth-child(4) { animation-delay: 0.3s; }
 
 @media (max-width: 1024px) {
     .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+        max-width: 500px;
     }
 }
 
 @media (max-width: 480px) {
     .stats-section {
-        padding: var(--spacing-3xl) 0;
+        padding: var(--spacing-2xl) 0;
     }
 
     .stats-grid {
-        grid-template-columns: 1fr;
-        max-width: 320px;
-        margin: 0 auto;
-        gap: var(--spacing-lg);
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 100%;
+        gap: var(--spacing-md);
+    }
+
+    .stat-box {
+        padding: var(--spacing-md);
     }
 
     .stat-box .stat-number {
-        font-size: var(--font-size-4xl);
+        font-size: var(--font-size-2xl);
     }
 
     .stat-box .stat-icon {
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .stat-box .stat-icon i {
+        font-size: 1rem;
+    }
+
+    .stat-box .stat-label {
+        font-size: 0.65rem;
     }
 }
 
