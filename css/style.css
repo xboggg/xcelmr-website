@@ -1263,7 +1263,7 @@ button {
 .service-icon {
     width: 70px;
     height: 70px;
-    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%);
     border-radius: var(--radius-lg);
     display: flex;
     align-items: center;
@@ -1271,16 +1271,84 @@ button {
     font-size: 1.75rem;
     color: var(--primary);
     margin-bottom: var(--spacing-lg);
-    transition: all var(--transition-base);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    animation: icon-glow-pulse 3s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+/* Glowing pulse animation for service icons */
+@keyframes icon-glow-pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.1);
+        transform: translateY(0);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.4), 0 0 60px rgba(59, 130, 246, 0.2);
+        transform: translateY(-5px);
+    }
+}
+
+/* Rotating glow ring around icon */
+.service-icon::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: calc(var(--radius-lg) + 4px);
+    background: linear-gradient(45deg, var(--primary-light), var(--secondary), var(--primary-light), var(--secondary));
+    background-size: 400% 400%;
+    animation: gradient-rotate 4s linear infinite;
+    opacity: 0.5;
+    z-index: -1;
+}
+
+@keyframes gradient-rotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Icon inner movement */
+.service-icon i {
+    animation: icon-float 2.5s ease-in-out infinite;
+}
+
+@keyframes icon-float {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
 }
 
 .service-card:hover .service-icon {
-    transform: scale(1.1) rotate(5deg);
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.5), 0 0 80px rgba(59, 130, 246, 0.3);
+}
+
+.service-card:hover .service-icon i {
+    animation: none;
+    transform: scale(1.2);
 }
 
 .service-card.featured .service-icon {
     background: rgba(255, 255, 255, 0.2);
     color: var(--white);
+    animation: icon-glow-pulse-featured 3s ease-in-out infinite;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+@keyframes icon-glow-pulse-featured {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(245, 158, 11, 0.2);
+        transform: translateY(0);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.5), 0 0 60px rgba(245, 158, 11, 0.4);
+        transform: translateY(-5px);
+    }
+}
+
+.service-card.featured .service-icon::before {
+    background: linear-gradient(45deg, var(--secondary), var(--white), var(--secondary), var(--white));
+    background-size: 400% 400%;
 }
 
 .service-title {
@@ -1743,20 +1811,31 @@ button {
 .whatsapp-float {
     position: fixed;
     bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
+    right: 20px;
+    width: 55px;
+    height: 55px;
     background: #25D366;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 2rem;
+    font-size: 1.75rem;
     box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
     z-index: var(--z-fixed);
     transition: all var(--transition-base);
-    animation: pulse 2s ease infinite;
+    animation: whatsapp-pulse 2s ease infinite;
+    /* Prevent overflow issues */
+    max-width: calc(100vw - 40px);
+}
+
+@keyframes whatsapp-pulse {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 30px rgba(37, 211, 102, 0.6), 0 0 50px rgba(37, 211, 102, 0.3);
+    }
 }
 
 .whatsapp-float:hover {
@@ -1991,19 +2070,25 @@ button {
     }
 
     .whatsapp-float {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-        font-size: 1.5rem;
+        bottom: 15px;
+        right: 15px;
+        width: 48px;
+        height: 48px;
+        font-size: 1.4rem;
     }
 
     .back-to-top {
-        bottom: 80px;
-        right: 20px;
-        width: 40px;
-        height: 40px;
+        bottom: 75px;
+        right: 15px;
+        width: 38px;
+        height: 38px;
     }
+}
+
+/* Prevent horizontal scroll on all devices */
+html, body {
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 /* ==========================================
