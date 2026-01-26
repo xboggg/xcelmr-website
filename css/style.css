@@ -621,12 +621,10 @@ button {
 }
 
 .logo-icon-img {
-    width: 42px;
-    height: 42px;
-    border-radius: var(--radius-md);
-    object-fit: cover;
+    height: 45px;
+    width: auto;
+    object-fit: contain;
     transition: all var(--transition-base);
-    margin-right: -2px;
 }
 
 .logo-text {
