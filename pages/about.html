@@ -91,7 +91,20 @@
                 </div>
 
                 <div class="why-us-image" data-aos="fade-left">
-                    <img src="../images/about-team.png" alt="African Business Team Meeting" style="border-radius: 1rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);">
+                    <div class="about-carousel" style="position: relative; border-radius: 1rem; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);">
+                        <div class="about-slides">
+                            <img src="../images/about-slide-1.png" alt="XcelMR Team" class="about-slide active" style="width: 100%; display: block;">
+                            <img src="../images/about-slide-2.png" alt="XcelMR Services" class="about-slide" style="width: 100%; display: none;">
+                            <img src="../images/about-slide-3.png" alt="XcelMR Events" class="about-slide" style="width: 100%; display: none;">
+                            <img src="../images/about-slide-4.png" alt="XcelMR Operations" class="about-slide" style="width: 100%; display: none;">
+                        </div>
+                        <div class="about-carousel-dots" style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px;">
+                            <span class="about-dot active" style="width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: 1; cursor: pointer;"></span>
+                            <span class="about-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: 0.5; cursor: pointer;"></span>
+                            <span class="about-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: 0.5; cursor: pointer;"></span>
+                            <span class="about-dot" style="width: 10px; height: 10px; border-radius: 50%; background: #fff; opacity: 0.5; cursor: pointer;"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -293,6 +306,37 @@
     <script src="../js/main.js"></script>
     <script>
         AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
+
+        // About page image carousel
+        (function() {
+            const slides = document.querySelectorAll('.about-slide');
+            const dots = document.querySelectorAll('.about-dot');
+            let currentSlide = 0;
+            const slideInterval = 4000; // 4 seconds
+
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.style.display = i === index ? 'block' : 'none';
+                });
+                dots.forEach((dot, i) => {
+                    dot.style.opacity = i === index ? '1' : '0.5';
+                });
+                currentSlide = index;
+            }
+
+            function nextSlide() {
+                const next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            }
+
+            // Auto-advance slides
+            setInterval(nextSlide, slideInterval);
+
+            // Click on dots to navigate
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => showSlide(index));
+            });
+        })();
     </script>
 </body>
 </html>
