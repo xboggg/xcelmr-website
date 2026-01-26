@@ -620,6 +620,14 @@ button {
     transition: all var(--transition-base);
 }
 
+.logo-icon-img {
+    width: 42px;
+    height: 42px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    transition: all var(--transition-base);
+}
+
 .logo-text {
     color: var(--white);
     transition: all var(--transition-base);
