@@ -631,6 +631,7 @@ button {
     width: auto;
     object-fit: contain;
     transition: all var(--transition-base);
+    margin-right: 6px;
 }
 
 .logo-text {
