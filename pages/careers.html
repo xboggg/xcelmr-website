@@ -225,7 +225,7 @@
 
             <!-- Jobs List -->
             <div class="jobs-list">
-                <div class="job-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="job-card" data-aos="fade-up" data-aos-delay="100" data-industry="events" data-type="part-time" data-location="accra">
                     <div class="job-card-header">
                         <h3 class="job-title">Event Ushers</h3>
                         <span class="job-type">Part Time</span>
@@ -242,7 +242,7 @@
                     <a href="contact.html" class="btn btn-primary">Apply Now</a>
                 </div>
 
-                <div class="job-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="job-card" data-aos="fade-up" data-aos-delay="200" data-industry="hospitality" data-type="full-time" data-location="accra">
                     <div class="job-card-header">
                         <h3 class="job-title">Hotel Assistants</h3>
                         <span class="job-type">Full Time</span>
@@ -259,7 +259,7 @@
                     <a href="contact.html" class="btn btn-primary">Apply Now</a>
                 </div>
 
-                <div class="job-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="job-card" data-aos="fade-up" data-aos-delay="300" data-industry="banking" data-type="full-time" data-location="accra,kumasi">
                     <div class="job-card-header">
                         <h3 class="job-title">Front Desk Assistants</h3>
                         <span class="job-type">Full Time</span>
@@ -276,7 +276,7 @@
                     <a href="contact.html" class="btn btn-primary">Apply Now</a>
                 </div>
 
-                <div class="job-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="job-card" data-aos="fade-up" data-aos-delay="400" data-industry="warehouse" data-type="full-time" data-location="tema">
                     <div class="job-card-header">
                         <h3 class="job-title">Warehouse Operatives</h3>
                         <span class="job-type">Full Time</span>
@@ -293,7 +293,7 @@
                     <a href="contact.html" class="btn btn-primary">Apply Now</a>
                 </div>
 
-                <div class="job-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="job-card" data-aos="fade-up" data-aos-delay="500" data-industry="healthcare" data-type="full-time" data-location="accra">
                     <div class="job-card-header">
                         <h3 class="job-title">Healthcare Receptionists</h3>
                         <span class="job-type">Full Time</span>
@@ -310,7 +310,7 @@
                     <a href="contact.html" class="btn btn-primary">Apply Now</a>
                 </div>
 
-                <div class="job-card" data-aos="fade-up" data-aos-delay="600">
+                <div class="job-card" data-aos="fade-up" data-aos-delay="600" data-industry="retail" data-type="contract" data-location="accra">
                     <div class="job-card-header">
                         <h3 class="job-title">Customer Service Representatives</h3>
                         <span class="job-type">Contract</span>
@@ -327,7 +327,7 @@
                     <a href="contact.html" class="btn btn-primary">Apply Now</a>
                 </div>
 
-                <div class="job-card" data-aos="fade-up" data-aos-delay="700">
+                <div class="job-card" data-aos="fade-up" data-aos-delay="700" data-industry="hospitality" data-type="temporary" data-location="accra,kumasi,tema,takoradi">
                     <div class="job-card-header">
                         <h3 class="job-title">Hospitality Staff</h3>
                         <span class="job-type">Temporary</span>
@@ -344,7 +344,7 @@
                     <a href="contact.html" class="btn btn-primary">Apply Now</a>
                 </div>
 
-                <div class="job-card" data-aos="fade-up" data-aos-delay="800">
+                <div class="job-card" data-aos="fade-up" data-aos-delay="800" data-industry="banking" data-type="full-time" data-location="accra,kumasi">
                     <div class="job-card-header">
                         <h3 class="job-title">Bank Tellers</h3>
                         <span class="job-type">Full Time</span>
@@ -507,6 +507,57 @@
     <script src="../js/main.js"></script>
     <script>
         AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
+
+        // Job Filters Functionality
+        (function() {
+            const industryFilter = document.getElementById('industry-filter');
+            const typeFilter = document.getElementById('type-filter');
+            const locationFilter = document.getElementById('location-filter');
+            const jobCards = document.querySelectorAll('.job-card');
+
+            function filterJobs() {
+                const selectedIndustry = industryFilter.value;
+                const selectedType = typeFilter.value;
+                const selectedLocation = locationFilter.value;
+
+                let visibleCount = 0;
+
+                jobCards.forEach(card => {
+                    const cardIndustry = card.dataset.industry || '';
+                    const cardType = card.dataset.type || '';
+                    const cardLocations = card.dataset.location || '';
+
+                    const industryMatch = !selectedIndustry || cardIndustry === selectedIndustry;
+                    const typeMatch = !selectedType || cardType === selectedType;
+                    const locationMatch = !selectedLocation || cardLocations.includes(selectedLocation);
+
+                    if (industryMatch && typeMatch && locationMatch) {
+                        card.style.display = '';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+
+                // Show/hide no results message
+                let noResultsMsg = document.querySelector('.no-results-message');
+                if (visibleCount === 0) {
+                    if (!noResultsMsg) {
+                        noResultsMsg = document.createElement('div');
+                        noResultsMsg.className = 'no-results-message';
+                        noResultsMsg.innerHTML = '<p style="text-align: center; padding: 2rem; color: var(--gray-600);">No jobs match your selected filters. Try adjusting your criteria.</p>';
+                        document.querySelector('.jobs-list').appendChild(noResultsMsg);
+                    }
+                    noResultsMsg.style.display = 'block';
+                } else if (noResultsMsg) {
+                    noResultsMsg.style.display = 'none';
+                }
+            }
+
+            industryFilter.addEventListener('change', filterJobs);
+            typeFilter.addEventListener('change', filterJobs);
+            locationFilter.addEventListener('change', filterJobs);
+        })();
     </script>
 </body>
 </html>
