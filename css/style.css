@@ -605,6 +605,12 @@ button {
     font-weight: 800;
     font-size: var(--font-size-2xl);
     z-index: 10;
+    color: var(--white);
+    transition: all var(--transition-base);
+}
+
+.header.scrolled .logo {
+    color: var(--dark);
 }
 
 .logo-icon {
