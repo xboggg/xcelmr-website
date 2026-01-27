@@ -601,7 +601,7 @@ button {
 .logo {
     display: flex;
     align-items: center;
-    gap: 0;
+    gap: 4px;
     font-weight: 800;
     font-size: var(--font-size-2xl);
     z-index: 10;
@@ -627,11 +627,10 @@ button {
 }
 
 .logo-icon-img {
-    height: 45px;
+    height: 40px;
     width: auto;
     object-fit: contain;
     transition: all var(--transition-base);
-    margin-right: 6px;
 }
 
 .logo-text {
