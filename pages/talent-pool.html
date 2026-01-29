@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join XcelMR Services talent pool - Submit your CV and we'll contact you when opportunities arise.">
+    <title>Talent Pool Application | Xcel Services Ltd</title>
+
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css?v=4">
+
+    <style>
+        /* Form Container */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--white);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            overflow: hidden;
+        }
+
+        /* Progress Bar */
+        .form-progress {
+            display: flex;
+            background: var(--gray-100);
+            padding: 0;
+        }
+
+        .progress-step {
+            flex: 1;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            font-size: var(--font-size-sm);
+            font-weight: 500;
+            color: var(--gray-500);
+            position: relative;
+            transition: all var(--transition-base);
+        }
+
+        .progress-step.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .progress-step.completed {
+            background: var(--success);
+            color: var(--white);
+        }
+
+        .progress-step span {
+            display: block;
+            font-size: 0.75rem;
+            margin-top: 0.25rem;
+            opacity: 0.8;
+        }
+
+        /* Form Content */
+        .form-content {
+            padding: var(--spacing-2xl);
+        }
+
+        .form-step {
+            display: none;
+        }
+
+        .form-step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-section-title {
+            font-size: var(--font-size-xl);
+            color: var(--dark);
+            margin-bottom: var(--spacing-xs);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-section-title i {
+            color: var(--primary);
+        }
+
+        .form-section-subtitle {
+            color: var(--gray-600);
+            margin-bottom: var(--spacing-xl);
+            font-size: var(--font-size-sm);
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-md);
+        }
+
+        .form-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: var(--font-size-sm);
+        }
+
+        .form-group label .required {
+            color: var(--danger);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all var(--transition-base);
+            background: var(--white);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group input.error,
+        .form-group select.error {
+            border-color: var(--danger);
+        }
+
+        .form-group .error-message {
+            color: var(--danger);
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: none;
+        }
+
+        .form-group input.error + .error-message,
+        .form-group select.error + .error-message {
+            display: block;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group small {
+            color: var(--gray-500);
+            font-size: 0.8rem;
+            display: block;
+            margin-top: 0.25rem;
+        }
+
+        /* File Upload */
+        .file-upload {
+            position: relative;
+            border: 2px dashed var(--gray-300);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all var(--transition-base);
+            cursor: pointer;
+            background: var(--gray-50);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .file-upload.dragover {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        .file-upload.has-file {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.05);
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .file-upload-icon {
+            font-size: 2rem;
+            color: var(--gray-400);
+            margin-bottom: 0.5rem;
+        }
+
+        .file-upload.has-file .file-upload-icon {
+            color: var(--success);
+        }
+
+        .file-upload-text {
+            color: var(--gray-600);
+            font-size: var(--font-size-sm);
+        }
+
+        .file-upload-text strong {
+            color: var(--primary);
+        }
+
+        .file-name {
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        .file-requirements {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-top: 0.5rem;
+        }
+
+        /* Other Specify Field */
+        .other-specify {
+            margin-top: var(--spacing-sm);
+            display: none;
+        }
+
+        .other-specify.show {
+            display: block;
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-top: 0.125rem;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        .checkbox-group label a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        /* Form Navigation */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-xl);
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .btn-prev {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .btn-prev:hover {
+            background: var(--gray-200);
+        }
+
+        .btn-next,
+        .btn-submit {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-next:hover,
+        .btn-submit:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-submit {
+            background: var(--success);
+        }
+
+        .btn-submit:hover {
+            background: #059669;
+        }
+
+        .btn i {
+            margin-right: 0.5rem;
+        }
+
+        .btn-next i {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+
+        /* Success Message */
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: var(--spacing-3xl);
+        }
+
+        .form-success.show {
+            display: block;
+        }
+
+        .form-success i {
+            font-size: 4rem;
+            color: var(--success);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-success h2 {
+            color: var(--dark);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .form-success p {
+            color: var(--gray-600);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        /* Loading State */
+        .btn-submit.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        .btn-submit.loading i {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-content {
+                padding: var(--spacing-lg);
+            }
+
+            .progress-step {
+                padding: 1rem 0.5rem;
+                font-size: 0.75rem;
+            }
+
+            .progress-step span {
+                display: none;
+            }
+
+            .form-navigation {
+                flex-direction: column;
+                gap: var(--spacing-md);
+            }
+
+            .form-navigation .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header scrolled" id="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="../index.html" class="logo"><img src="../images/logo.png" alt="Xcel Logo" class="logo-icon-img">XcelMR</a>
+
+                <ul class="nav-menu" id="nav-menu">
+                    <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">About Us</a></li>
+                    <li class="nav-item dropdown">
+                        <a href="services.html" class="nav-link">Services <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="recruitment.html">Xcel Recruitment & Outsourcing</a></li>
+                            <li><a href="ushering.html">Xcel Ushering</a></li>
+                            <li><a href="package-holidays.html">Xcel Package Holidays</a></li>
+                            <li><a href="mobile-repair.html">Xcel Mobile Mechanics & Repair Centre</a></li>
+                            <li><a href="facilities.html">Xcel Facilities & Property Management</a></li>
+                            <li><a href="footy-direct.html">Xcel Footy Direct</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a href="careers.html" class="nav-link active">Careers</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+
+                <a href="contact.html" class="btn btn-primary nav-cta">Get Started</a>
+
+                <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+                    <span class="hamburger"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content" data-aos="fade-up">
+                <h1 class="page-header-title">Join Our Talent Pool</h1>
+                <p class="page-header-subtitle">
+                    Submit your application and we'll contact you when opportunities match your skills
+                </p>
+                <div class="breadcrumb">
+                    <a href="../index.html">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="careers.html">Careers</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Talent Pool</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Form Section -->
+    <section class="section">
+        <div class="container">
+            <div class="form-container" data-aos="fade-up">
+                <!-- Progress Bar -->
+                <div class="form-progress">
+                    <div class="progress-step active" data-step="1">
+                        <i class="fas fa-user"></i> Personal Info
+                        <span>Your details</span>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <i class="fas fa-phone-alt"></i> Emergency Contact
+                        <span>Contact person</span>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <i class="fas fa-file-upload"></i> Documents
+                        <span>Upload files</span>
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <form id="talentPoolForm" action="https://formspree.io/f/xdazanwk" method="POST" enctype="multipart/form-data">
+                    <div class="form-content">
+                        <!-- Step 1: Personal Information -->
+                        <div class="form-step active" data-step="1">
+                            <h3 class="form-section-title"><i class="fas fa-user-circle"></i> Personal Information</h3>
+                            <p class="form-section-subtitle">Please provide your personal details accurately.</p>
+
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label for="fullName">Full Name <span class="required">*</span></label>
+                                    <input type="text" id="fullName" name="Full Name" required placeholder="Enter your full name">
+                                    <span class="error-message">Please enter your full name</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dateOfBirth">Date of Birth <span class="required">*</span></label>
+                                    <input type="date" id="dateOfBirth" name="Date of Birth" required>
+                                    <span class="error-message">Please select your date of birth</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="maritalStatus">Marital Status <span class="required">*</span></label>
+                                    <select id="maritalStatus" name="Marital Status" required>
+                                        <option value="">Select status</option>
+                                        <option value="Single">Single</option>
+                                        <option value="Married">Married</option>
+                                        <option value="Divorced">Divorced</option>
+                                        <option value="Widowed">Widowed</option>
+                                    </select>
+                                    <span class="error-message">Please select your marital status</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Phone Number <span class="required">*</span></label>
+                                    <input type="tel" id="phone" name="Phone" required placeholder="e.g., 0XX XXX XXXX">
+                                    <span class="error-message">Please enter a valid phone number</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="altPhone">Alternate Phone</label>
+                                    <input type="tel" id="altPhone" name="Alternate Phone" placeholder="e.g., 0XX XXX XXXX">
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="email">Email Address <span class="required">*</span></label>
+                                    <input type="email" id="email" name="Email" required placeholder="your.email@example.com">
+                                    <span class="error-message">Please enter a valid email address</span>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="address">Residential Address <span class="required">*</span></label>
+                                    <textarea id="address" name="Address" required placeholder="Enter your full residential address"></textarea>
+                                    <span class="error-message">Please enter your address</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="region">Region <span class="required">*</span></label>
+                                    <select id="region" name="Region" required>
+                                        <option value="">Select region</option>
+                                        <option value="Greater Accra">Greater Accra</option>
+                                        <option value="Ashanti">Ashanti</option>
+                                        <option value="Western">Western</option>
+                                        <option value="Eastern">Eastern</option>
+                                        <option value="Central">Central</option>
+                                        <option value="Volta">Volta</option>
+                                        <option value="Northern">Northern</option>
+                                        <option value="Upper East">Upper East</option>
+                                        <option value="Upper West">Upper West</option>
+                                        <option value="Bono">Bono</option>
+                                        <option value="Bono East">Bono East</option>
+                                        <option value="Ahafo">Ahafo</option>
+                                        <option value="Western North">Western North</option>
+                                        <option value="Oti">Oti</option>
+                                        <option value="North East">North East</option>
+                                        <option value="Savannah">Savannah</option>
+                                    </select>
+                                    <span class="error-message">Please select your region</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="digitalAddress">Digital Address (GPS)</label>
+                                    <input type="text" id="digitalAddress" name="Digital Address" placeholder="e.g., GA-XXX-XXXX">
+                                    <small>Ghana Post GPS address</small>
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="ghanaCardId">Ghana Card ID <span class="required">*</span></label>
+                                    <input type="text" id="ghanaCardId" name="Ghana Card ID" required placeholder="GHA-XXXXXXXXX-X" pattern="GHA-[0-9]{9}-[0-9]">
+                                    <small>Format: GHA-XXXXXXXXX-X</small>
+                                    <span class="error-message">Please enter a valid Ghana Card ID</span>
+                                </div>
+                            </div>
+
+                            <div class="form-navigation">
+                                <div></div>
+                                <button type="button" class="btn btn-next" onclick="nextStep()">
+                                    Continue <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Emergency Contact -->
+                        <div class="form-step" data-step="2">
+                            <h3 class="form-section-title"><i class="fas fa-user-shield"></i> Emergency Contact Information</h3>
+                            <p class="form-section-subtitle">Please provide details of someone we can contact in case of emergency.</p>
+
+                            <div class="form-grid">
+                                <div class="form-group full-width">
+                                    <label for="emergencyName">Full Name <span class="required">*</span></label>
+                                    <input type="text" id="emergencyName" name="Emergency Contact Name" required placeholder="Enter contact's full name">
+                                    <span class="error-message">Please enter the contact's name</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="relationship">Relationship <span class="required">*</span></label>
+                                    <select id="relationship" name="Emergency Contact Relationship" required>
+                                        <option value="">Select relationship</option>
+                                        <option value="Parent">Parent</option>
+                                        <option value="Spouse">Spouse</option>
+                                        <option value="Sibling">Sibling</option>
+                                        <option value="Child">Child</option>
+                                        <option value="Friend">Friend</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span class="error-message">Please select the relationship</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="emergencyPhone">Phone Number <span class="required">*</span></label>
+                                    <input type="tel" id="emergencyPhone" name="Emergency Contact Phone" required placeholder="e.g., 0XX XXX XXXX">
+                                    <span class="error-message">Please enter a valid phone number</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="emergencyAltPhone">Alternate Phone</label>
+                                    <input type="tel" id="emergencyAltPhone" name="Emergency Contact Alternate Phone" placeholder="e.g., 0XX XXX XXXX">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="emergencyEmail">Email Address</label>
+                                    <input type="email" id="emergencyEmail" name="Emergency Contact Email" placeholder="contact@example.com">
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="emergencyAddress">Address</label>
+                                    <textarea id="emergencyAddress" name="Emergency Contact Address" placeholder="Enter contact's address"></textarea>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="emergencyRegion">Region</label>
+                                    <select id="emergencyRegion" name="Emergency Contact Region">
+                                        <option value="">Select region</option>
+                                        <option value="Greater Accra">Greater Accra</option>
+                                        <option value="Ashanti">Ashanti</option>
+                                        <option value="Western">Western</option>
+                                        <option value="Eastern">Eastern</option>
+                                        <option value="Central">Central</option>
+                                        <option value="Volta">Volta</option>
+                                        <option value="Northern">Northern</option>
+                                        <option value="Upper East">Upper East</option>
+                                        <option value="Upper West">Upper West</option>
+                                        <option value="Bono">Bono</option>
+                                        <option value="Bono East">Bono East</option>
+                                        <option value="Ahafo">Ahafo</option>
+                                        <option value="Western North">Western North</option>
+                                        <option value="Oti">Oti</option>
+                                        <option value="North East">North East</option>
+                                        <option value="Savannah">Savannah</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="emergencyDigitalAddress">Digital Address (GPS)</label>
+                                    <input type="text" id="emergencyDigitalAddress" name="Emergency Contact Digital Address" placeholder="e.g., GA-XXX-XXXX">
+                                </div>
+
+                                <div class="form-group full-width">
+                                    <label for="emergencyGhanaCard">Ghana Card ID</label>
+                                    <input type="text" id="emergencyGhanaCard" name="Emergency Contact Ghana Card" placeholder="GHA-XXXXXXXXX-X">
+                                </div>
+                            </div>
+
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn-prev" onclick="prevStep()">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button type="button" class="btn btn-next" onclick="nextStep()">
+                                    Continue <i class="fas fa-arrow-right"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Documents & Submit -->
+                        <div class="form-step" data-step="3">
+                            <h3 class="form-section-title"><i class="fas fa-folder-open"></i> Documents & Preferences</h3>
+                            <p class="form-section-subtitle">Upload your documents and tell us about your job preferences.</p>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="positionInterest">Position of Interest <span class="required">*</span></label>
+                                    <select id="positionInterest" name="Position of Interest" required onchange="toggleOtherPosition()">
+                                        <option value="">Select a position</option>
+                                        <option value="Event Usher">Event Usher</option>
+                                        <option value="Hotel Assistant">Hotel Assistant</option>
+                                        <option value="Front Desk Assistant">Front Desk Assistant</option>
+                                        <option value="Warehouse Operative">Warehouse Operative</option>
+                                        <option value="Healthcare Receptionist">Healthcare Receptionist</option>
+                                        <option value="Customer Service Representative">Customer Service Representative</option>
+                                        <option value="Hospitality Staff">Hospitality Staff</option>
+                                        <option value="Bank Teller">Bank Teller</option>
+                                        <option value="Driver">Driver</option>
+                                        <option value="Security Personnel">Security Personnel</option>
+                                        <option value="Cleaner/Janitorial Staff">Cleaner/Janitorial Staff</option>
+                                        <option value="Administrative Assistant">Administrative Assistant</option>
+                                        <option value="Any Available Position">Any Available Position</option>
+                                        <option value="Other">Other (please specify)</option>
+                                    </select>
+                                    <span class="error-message">Please select a position</span>
+                                    <div class="other-specify" id="otherPositionDiv">
+                                        <input type="text" id="otherPosition" name="Other Position" placeholder="Please specify your preferred position">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="hearAbout">How did you hear about us?</label>
+                                    <select id="hearAbout" name="How Did You Hear About Us">
+                                        <option value="">Select an option</option>
+                                        <option value="Social Media">Social Media</option>
+                                        <option value="Friend/Family">Friend/Family</option>
+                                        <option value="Job Board">Job Board</option>
+                                        <option value="Website">Website</option>
+                                        <option value="Radio/TV">Radio/TV</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+
+                                <!-- CV Upload -->
+                                <div class="form-group full-width">
+                                    <label>CV / Resume <span class="required">*</span></label>
+                                    <div class="file-upload" id="cvUpload">
+                                        <input type="file" id="cv" name="CV" accept=".pdf" required onchange="handleFileUpload(this, 'cvUpload')">
+                                        <div class="file-upload-icon"><i class="fas fa-file-pdf"></i></div>
+                                        <div class="file-upload-text">
+                                            <strong>Click to upload</strong> or drag and drop<br>
+                                            your CV here
+                                        </div>
+                                        <div class="file-name" id="cvFileName"></div>
+                                        <div class="file-requirements">PDF only, max 10MB</div>
+                                    </div>
+                                    <span class="error-message" id="cvError">Please upload your CV</span>
+                                </div>
+
+                                <!-- Cover Letter Upload -->
+                                <div class="form-group full-width">
+                                    <label>Cover Letter</label>
+                                    <div class="file-upload" id="coverLetterUpload">
+                                        <input type="file" id="coverLetter" name="Cover Letter" accept=".pdf" onchange="handleFileUpload(this, 'coverLetterUpload')">
+                                        <div class="file-upload-icon"><i class="fas fa-file-pdf"></i></div>
+                                        <div class="file-upload-text">
+                                            <strong>Click to upload</strong> or drag and drop<br>
+                                            your cover letter here
+                                        </div>
+                                        <div class="file-name" id="coverLetterFileName"></div>
+                                        <div class="file-requirements">PDF only, max 10MB (Optional)</div>
+                                    </div>
+                                </div>
+
+                                <!-- Ghana Card Upload -->
+                                <div class="form-group full-width">
+                                    <label>Ghana Card (Photo) <span class="required">*</span></label>
+                                    <div class="file-upload" id="ghanaCardUpload">
+                                        <input type="file" id="ghanaCard" name="Ghana Card Image" accept=".jpg,.jpeg" required onchange="handleFileUpload(this, 'ghanaCardUpload')">
+                                        <div class="file-upload-icon"><i class="fas fa-id-card"></i></div>
+                                        <div class="file-upload-text">
+                                            <strong>Click to upload</strong> or drag and drop<br>
+                                            a photo of your Ghana Card
+                                        </div>
+                                        <div class="file-name" id="ghanaCardFileName"></div>
+                                        <div class="file-requirements">JPEG/JPG only, max 10MB</div>
+                                    </div>
+                                    <span class="error-message" id="ghanaCardError">Please upload your Ghana Card image</span>
+                                </div>
+
+                                <!-- Terms & Conditions -->
+                                <div class="form-group full-width">
+                                    <div class="checkbox-group">
+                                        <input type="checkbox" id="terms" name="Terms Accepted" required>
+                                        <label for="terms">
+                                            I confirm that the information provided is accurate and I agree to the
+                                            <a href="privacy.html" target="_blank">Privacy Policy</a> and
+                                            <a href="terms.html" target="_blank">Terms of Service</a>. <span class="required">*</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-navigation">
+                                <button type="button" class="btn btn-prev" onclick="prevStep()">
+                                    <i class="fas fa-arrow-left"></i> Back
+                                </button>
+                                <button type="submit" class="btn btn-submit" id="submitBtn">
+                                    <i class="fas fa-paper-plane"></i> Submit Application
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Success Message -->
+                        <div class="form-success" id="formSuccess">
+                            <i class="fas fa-check-circle"></i>
+                            <h2>Application Submitted Successfully!</h2>
+                            <p>
+                                Thank you for joining our talent pool. We have received your application
+                                and will contact you when suitable opportunities arise that match your
+                                skills and experience.
+                            </p>
+                            <a href="careers.html" class="btn btn-primary">
+                                <i class="fas fa-briefcase"></i> View Current Openings
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="../index.html" class="logo"><img src="../images/logo.png" alt="Xcel Logo" class="logo-icon-img">XcelMR</a>
+                    <p class="footer-description">
+                        Xcel Management and Recruitment Services Ltd is a premier multi-service solutions provider
+                        committed to delivering reliable, efficient, and high-quality support
+                        across recruitment, outsourcing, and facility needs in Ghana.
+                    </p>
+                    <div class="footer-social">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-links">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="recruitment.html">Recruitment & Outsourcing</a></li>
+                        <li><a href="ushering.html">Ushering</a></li>
+                        <li><a href="package-holidays.html">Package Holidays</a></li>
+                        <li><a href="mobile-repair.html">Mobile Mechanics & Repair Centre</a></li>
+                        <li><a href="facilities.html">Facilities Management</a></li>
+                        <li><a href="footy-direct.html">Footy Direct</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-phone"></i><i class="fab fa-whatsapp" style="margin-left: 5px;"></i><a href="tel:+233548254109"> 054 825 4109</a></li>
+                        <li><i class="fas fa-envelope"></i><a href="mailto:recruitment@xcelmrservices.com.gh">recruitment@xcelmrservices.com.gh</a></li>
+                        <li><i class="fas fa-map-marker-alt"></i><a href="https://maps.google.com/?q=Davi+Adzo+Street,+Accra,+Ghana" target="_blank">Davi Adzo Street, Accra, Ghana</a></li>
+                        <li><i class="fas fa-location-dot"></i><span>GhanaPostGPS: GE-234-6455</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Xcel Services Ltd. All Rights Reserved.</p>
+                <div class="footer-bottom-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/233548254109" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
+
+        let currentStep = 1;
+        const totalSteps = 3;
+        const maxFileSize = 10 * 1024 * 1024; // 10MB
+
+        // Step Navigation
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.progress-step').forEach(s => {
+                s.classList.remove('active');
+                if (parseInt(s.dataset.step) < step) {
+                    s.classList.add('completed');
+                } else {
+                    s.classList.remove('completed');
+                }
+            });
+
+            document.querySelector(`.form-step[data-step="${step}"]`).classList.add('active');
+            document.querySelector(`.progress-step[data-step="${step}"]`).classList.add('active');
+
+            window.scrollTo({ top: 300, behavior: 'smooth' });
+        }
+
+        function validateStep(step) {
+            const stepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+            const requiredFields = stepEl.querySelectorAll('[required]');
+            let isValid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value || (field.type === 'checkbox' && !field.checked)) {
+                    field.classList.add('error');
+                    isValid = false;
+                } else {
+                    field.classList.remove('error');
+                }
+            });
+
+            // Email validation
+            const emailField = stepEl.querySelector('input[type="email"][required]');
+            if (emailField && emailField.value) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(emailField.value)) {
+                    emailField.classList.add('error');
+                    isValid = false;
+                }
+            }
+
+            // Ghana Card ID validation
+            const ghanaCardField = stepEl.querySelector('#ghanaCardId');
+            if (ghanaCardField && ghanaCardField.value) {
+                const ghanaCardRegex = /^GHA-\d{9}-\d$/;
+                if (!ghanaCardRegex.test(ghanaCardField.value)) {
+                    ghanaCardField.classList.add('error');
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        function nextStep() {
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    currentStep++;
+                    showStep(currentStep);
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        // File Upload Handler
+        function handleFileUpload(input, uploadId) {
+            const uploadDiv = document.getElementById(uploadId);
+            const fileNameDiv = document.getElementById(uploadId.replace('Upload', 'FileName'));
+            const file = input.files[0];
+
+            if (file) {
+                // Check file size
+                if (file.size > maxFileSize) {
+                    alert('File size exceeds 10MB limit. Please choose a smaller file.');
+                    input.value = '';
+                    uploadDiv.classList.remove('has-file');
+                    fileNameDiv.textContent = '';
+                    return;
+                }
+
+                uploadDiv.classList.add('has-file');
+                fileNameDiv.textContent = file.name + ' (' + (file.size / 1024 / 1024).toFixed(2) + ' MB)';
+            } else {
+                uploadDiv.classList.remove('has-file');
+                fileNameDiv.textContent = '';
+            }
+        }
+
+        // Drag and drop
+        document.querySelectorAll('.file-upload').forEach(upload => {
+            upload.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                upload.classList.add('dragover');
+            });
+
+            upload.addEventListener('dragleave', () => {
+                upload.classList.remove('dragover');
+            });
+
+            upload.addEventListener('drop', (e) => {
+                e.preventDefault();
+                upload.classList.remove('dragover');
+                const input = upload.querySelector('input[type="file"]');
+                input.files = e.dataTransfer.files;
+                handleFileUpload(input, upload.id);
+            });
+        });
+
+        // Toggle Other Position Field
+        function toggleOtherPosition() {
+            const select = document.getElementById('positionInterest');
+            const otherDiv = document.getElementById('otherPositionDiv');
+            const otherInput = document.getElementById('otherPosition');
+
+            if (select.value === 'Other') {
+                otherDiv.classList.add('show');
+                otherInput.required = true;
+            } else {
+                otherDiv.classList.remove('show');
+                otherInput.required = false;
+                otherInput.value = '';
+            }
+        }
+
+        // Form Submission
+        document.getElementById('talentPoolForm').addEventListener('submit', function(e) {
+            if (!validateStep(currentStep)) {
+                e.preventDefault();
+                return;
+            }
+
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.classList.add('loading');
+            submitBtn.innerHTML = '<i class="fas fa-spinner"></i> Submitting...';
+        });
+
+        // Handle Formspree response
+        window.addEventListener('load', function() {
+            const form = document.getElementById('talentPoolForm');
+
+            form.addEventListener('submit', async function(e) {
+                e.preventDefault();
+
+                if (!validateStep(currentStep)) {
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submitBtn');
+                submitBtn.classList.add('loading');
+                submitBtn.innerHTML = '<i class="fas fa-spinner"></i> Submitting...';
+
+                const formData = new FormData(form);
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Hide form steps and show success
+                        document.querySelectorAll('.form-step').forEach(s => s.classList.remove('active'));
+                        document.querySelector('.form-progress').style.display = 'none';
+                        document.getElementById('formSuccess').classList.add('show');
+                        window.scrollTo({ top: 300, behavior: 'smooth' });
+                    } else {
+                        throw new Error('Submission failed');
+                    }
+                } catch (error) {
+                    alert('There was an error submitting your application. Please try again or contact us directly.');
+                    submitBtn.classList.remove('loading');
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Application';
+                }
+            });
+        });
+
+        // Remove error class on input
+        document.querySelectorAll('input, select, textarea').forEach(field => {
+            field.addEventListener('input', function() {
+                this.classList.remove('error');
+            });
+        });
+    </script>
+</body>
+</html>
