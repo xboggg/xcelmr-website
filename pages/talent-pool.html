@@ -880,6 +880,20 @@
     <script>
         AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
 
+        // Pre-select position from URL parameter
+        const urlParams = new URLSearchParams(window.location.search);
+        const positionParam = urlParams.get('position');
+        if (positionParam) {
+            const positionSelect = document.getElementById('positionInterest');
+            const options = positionSelect.options;
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].value === positionParam) {
+                    positionSelect.value = positionParam;
+                    break;
+                }
+            }
+        }
+
         let currentStep = 1;
         const totalSteps = 3;
         const maxFileSize = 10 * 1024 * 1024; // 10MB
