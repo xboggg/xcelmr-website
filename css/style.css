@@ -2106,6 +2106,87 @@ html, body {
 }
 
 /* ==========================================
+   MOBILE FIXES
+   ========================================== */
+
+/* Mobile menu toggle - ensure visibility */
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex !important;
+        position: relative;
+        z-index: 1001;
+    }
+
+    .hamburger,
+    .hamburger::before,
+    .hamburger::after {
+        background: var(--white) !important;
+    }
+
+    .header.scrolled .hamburger,
+    .header.scrolled .hamburger::before,
+    .header.scrolled .hamburger::after {
+        background: var(--dark) !important;
+    }
+
+    /* Industries/Clients section mobile fix */
+    .industries-grid {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: var(--spacing-md) !important;
+        justify-items: center;
+        max-width: 100%;
+        padding: 0 var(--spacing-md);
+    }
+
+    .industry-card {
+        width: 100%;
+        min-width: unset !important;
+        padding: var(--spacing-lg);
+        text-align: center;
+    }
+
+    .industry-card span {
+        font-size: var(--font-size-sm);
+        word-wrap: break-word;
+    }
+
+    .industry-card i {
+        font-size: 2rem;
+    }
+
+    /* Footer contact WhatsApp icon fix */
+    .footer-contact ul li i.fab.fa-whatsapp {
+        display: inline-block !important;
+        color: #25D366;
+    }
+
+    /* Ensure footer icons show */
+    .footer-contact ul li i {
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .industries-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: var(--spacing-sm) !important;
+    }
+
+    .industry-card {
+        padding: var(--spacing-md);
+    }
+
+    .industry-card i {
+        font-size: 1.5rem;
+    }
+
+    .industry-card span {
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* ==========================================
    PRELOADER
    ========================================== */
 .preloader {
