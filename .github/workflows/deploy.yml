@@ -20,7 +20,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: ${{ secrets.FTP_PORT }}
           local-dir: ./
-          server-dir: /xcelmrservices.com.gh/
+          server-dir: /public_html/xcelmrservices.com.gh/
           exclude: |
             **/.git*
             **/.git*/**
